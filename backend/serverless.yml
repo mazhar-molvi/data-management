@@ -1,0 +1,326 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: backend
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+# you can overwrite defaults here
+  stage: dev
+  region: us-east-1
+  iamRoleStatements: # permissions for all of your functions can be set here
+    - Effect: Allow
+      Action: # Gives permission to DynamoDB tables in a specific region
+        - dynamodb:*
+        - cognito:*
+        - lambda:*
+        - s3:*
+      Resource: "*"
+
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+# you can add packaging information here
+#package:
+#  include:
+#    - include-me.js
+#    - include-me-dir/**
+#  exclude:
+#    - exclude-me.js
+#    - exclude-me-dir/**
+
+functions:
+  updatePassword:
+    handler: handler.updatePassword
+    events:
+      - http:
+          path: updatePassword
+          method: post
+          cors: true
+          integration: lambda
+
+  addListing:
+    handler: handler.addListing
+    events:
+      - http:
+          path: addListing
+          method: post
+          cors: true
+          integration: lambda
+
+  test:
+    handler: handler.test
+    events:
+      - http:
+          path: test
+          method: post
+          cors: true
+          integration: lambda
+  list:
+      handler: handler.list
+      events:
+        - http:
+            path: todos
+            method: get
+            cors: true
+            integration: lambda
+  create:
+      handler: handler.create
+      events:
+        - http:
+            path: todos
+            method: post
+            cors: true
+            integration: lambda
+  update:
+      handler: handler.update
+      events:
+        - http:
+            path: todos/{id}
+            method: put
+            cors: true
+            integration: lambda
+  delete:
+    handler: handler.delete
+    events:
+      - http:
+          path: todos/{id}
+          method: delete
+          cors: true
+          integration: lambda
+  testScraping:
+      handler: handler.testScraping
+      events:
+        - http:
+            path: testScraping
+            method: post
+            cors: true
+            integration: lambda
+  saveScraping:
+      handler: handler.saveScraping
+      events:
+        - http:
+            path: saveScraping
+            method: post
+            cors: true
+            integration: lambda
+  singlePageScraping:
+      handler: handler.singlePageScraping
+      events:
+        - http:
+            path: singlePageScraping
+            method: post
+            cors: true
+            integration: lambda
+  uploadListing:
+      handler: handler.uploadListing
+      events:
+        - http:
+            path: uploadListing
+            method: post
+            cors: true
+            integration: lambda
+  uploadScrapingJob:
+      handler: handler.uploadScrapingJob
+      events:
+        - http:
+            path: uploadScrapingJob
+            method: post
+            cors: true
+            integration: lambda
+  getScraping:
+      handler: handler.getScraping
+      events:
+        - http:
+            path: getScraping
+            method: get
+            cors: true
+            integration: lambda
+  getlisting:
+      handler: handler.getlisting
+      events:
+        - http:
+            path: getlisting
+            method: get
+            cors: true
+            integration: lambda
+  getScrapingById:
+      handler: handler.getScrapingById
+      events:
+        - http:
+            path: getScrapingById/{id}
+            method: get
+            cors: true
+            integration: lambda
+  getListingById:
+      handler: handler.getListingById
+      events:
+        - http:
+            path: getListingById/{id}
+            method: get
+            cors: true
+            integration: lambda
+  deleteScraping:
+    handler: handler.deleteScraping
+    events:
+      - http:
+          path: deleteScraping/{id}
+          method: delete
+          cors: true
+          integration: lambda
+  deleteListing:
+    handler: handler.deleteListing
+    events:
+      - http:
+          path: deleteListing/{id}
+          method: delete
+          cors: true
+          integration: lambda
+  getLastScrapingById:
+      handler: handler.getLastScrapingById
+      events:
+        - http:
+            path: getLastScrapingById/{id}
+            method: get
+            cors: true
+            integration: lambda
+  processBulkTask:
+        handler: handler.processBulkTask
+        events:
+          - http:
+              path: processBulkTask
+              method: post
+              cors: true
+              integration: lambda
+  processBulkListing:
+        handler: handler.processBulkListing
+        events:
+          - http:
+              path: processBulkListing
+              method: post
+              cors: true
+              integration: lambda
+  processBulkScraping:
+        handler: handler.processBulkScraping
+        events:
+          - http:
+              path: processBulkScraping
+              method: post
+              cors: true
+              integration: lambda
+  saveCompany:
+        handler: handler.saveCompany
+        events:
+          - http:
+              path: saveCompany
+              method: post
+              cors: true
+              integration: lambda
+  deleteCompany:
+    handler: handler.deleteCompany
+    events:
+      - http:
+          path: deleteCompany/{id}
+          method: delete
+          cors: true
+          integration: lambda
+  companyList:
+        handler: handler.companyList
+        events:
+          - http:
+              path: companyList
+              method: get
+              cors: true
+              integration: lambda
+  getCompanyById:
+      handler: handler.getCompanyById
+      events:
+        - http:
+            path: getCompanyById/{id}
+            method: get
+            cors: true
+            integration: lambda
+  getCompanyTimeline:
+      handler: handler.getCompanyTimeline
+      events:
+        - http:
+            path: getCompanyTimeline
+            method: post
+            cors: true
+            integration: lambda
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details
+#    events:
+#      - http:
+#          path: users/create
+#          method: get
+#      - s3: ${env:BUCKET}
+#      - schedule: rate(10 minutes)
+#      - sns: greeter-topic
+#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
+#      - alexaSkill
+#      - iot:
+#          sql: "SELECT * FROM 'some_topic'"
+#      - cloudwatchEvent:
+#          event:
+#            source:
+#              - "aws.ec2"
+#            detail-type:
+#              - "EC2 Instance State-change Notification"
+#            detail:
+#              state:
+#                - pending
+#      - cloudwatchLog: '/aws/lambda/hello'
+#      - cognitoUserPool:
+#          pool: MyUserPool
+#          trigger: PreSignUp
+
+#    Define function environment variables here
+#    environment:
+#      variable2: value2
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"

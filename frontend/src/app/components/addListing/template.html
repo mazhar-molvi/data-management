@@ -1,0 +1,327 @@
+<!-- Theme JS files -->
+<script type="text/javascript" src="assets/js/pages/wizard_stepy.js"></script>
+<page-header></page-header>
+
+<!-- Page container -->
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main sidebar -->
+        <div class="sidebar sidebar-main">
+            <sidebar></sidebar>
+        </div>
+        <!-- /main sidebar -->
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Page header -->
+            <div class="page-header">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h4>
+                            <i class="icon-arrow-left52 position-left"></i>
+                            <span class="text-semibold">Wizards</span> - Stepy</h4>
+                    </div>
+
+
+                </div>
+
+                <div class="breadcrumb-line">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="index.html">
+                                <i class="icon-home2 position-left"></i> Home</a>
+                        </li>
+                        <li>
+                            <a href="wizards_stepy.html">Wizards</a>
+                        </li>
+                        <li class="active">Stepy</li>
+                    </ul>
+
+                    <ul class="breadcrumb-elements">
+
+                    </ul>
+                </div>
+            </div>
+            <!-- /page header -->
+
+
+            <!-- Content area -->
+            <div class="content">
+                <!-- Wizard with validation -->
+                <div class="panel panel-white">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">New Listing</h6>
+                        <div class="heading-elements">
+                            <ul class="icons-list">
+                                <li>
+                                    <a data-action="reload"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <form id="add-listing" class="stepy-validation">
+                        <fieldset title="1">
+                            <legend class="text-semibold">STEP 1</legend>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Url to be scraped:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" ng-model="$ctrl.listing.url" name="url" class="form-control required" placeholder="Enter Url">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Renewal Date:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" ng-model="$ctrl.listing.date" name="date" class="form-control required" placeholder="YYYYMMDD">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Select Company:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        
+                                        <ui-select on-select="$ctrl.onSelectCallback($item, $model)" ng-model="$ctrl.listing.companyname" theme="select2" style="padding: 0 0 0 0;" class="form-control required">
+                                            <ui-select-match placeholder="Company name">{{$select.selected.companyname}}</ui-select-match>
+                                            <ui-select-choices repeat="c in $ctrl.companyList | propsFilter: {companyname: $select.search}">
+                                                <div ng-bind-html="c.companyname | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <input type="text" ng-hide="true" name="company_name" ng-model="$ctrl.listing.companyname.companyname" class="form-control required" style="padding: 0 0 0 0;" ng-change="$ctrl.changec();">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Level:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <ui-select ng-model="$ctrl.listing.listing_level" theme="select2" style="padding: 0 0 0 0;"
+                                            class="form-control abc">
+                                            <ui-select-match placeholder="Level">{{$select.selected.value}}</ui-select-match>
+                                            <ui-select-choices repeat="c in $ctrl.levels | propsFilter: {value: $select.search}">
+                                                <div ng-bind-html="c.value | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <input type="text" ng-hide="true" name="listing_level" ng-model="$ctrl.listing.listing_level" class="form-control required" style="padding: 0 0 0 0;" ng-change="$ctrl.changec();">
+                                        <!-- <select name="listing_level" data-placeholder="Level" class="select select2-hidden-accessible required">
+                                                                    <option></option>
+                                                                    <option value="Level 1">Level 1</option>
+                                                                    <option value="Level 2">Level 2</option>
+                                                                    <option value="Level 3">Level 3</option>
+                                                                    <option value="Level 4">Level 4</option>
+                                                                </select> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Status:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <ui-select  ng-model="$ctrl.listing.listing_status" theme="select2" style="padding: 0 0 0 0;" class="form-control">
+                                            <ui-select-match placeholder="Listing status">{{$select.selected.value}}</ui-select-match>
+                                            <ui-select-choices repeat="c in $ctrl.listingStatus | propsFilter: {value: $select.search}">
+                                                <div ng-bind-html="c.value | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <input type="text" ng-hide="true"  name="listing_status" ng-model="$ctrl.listing.listing_status" class="form-control required" style="padding: 0 0 0 0;" ng-change="$ctrl.changec();">
+                                        <!-- <select name="listing_status" data-placeholder="Status" class="select select2-hidden-accessible required">
+                                                                            <option></option>
+                                                                            <option value="Disable">Disable</option>
+                                                                            <option value="Enable">Enable</option>
+                                                                        </select> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Template:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <ui-select ng-model="$ctrl.listing.listing_template" theme="select2" style="padding: 0 0 0 0;" class="form-control required">
+                                            <ui-select-match placeholder="Listing template">{{$select.selected.value}}</ui-select-match>
+                                            <ui-select-choices repeat="c in $ctrl.listingTemplate | propsFilter: {value: $select.search}">
+                                                <div ng-bind-html="c.value | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <input type="text" ng-hide="true" name="listing_template" ng-model="$ctrl.listing.listing_template" class="form-control required" style="padding: 0 0 0 0;">
+                                        <!-- <select name="listing_template" data-placeholder="Template" class="select select2-hidden-accessible required">
+                                                                    <option></option>
+                                                                    <option value="Template 1">Template 1</option>
+                                                                    <option value="Template 2">Template 2</option>
+                                                                    <option value="Template 3">Template 3</option>
+                                                                    <option value="Template 4">Template 4</option>
+                                                                </select> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset title="2">
+                            <legend class="text-semibold">STEP 2</legend>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Category:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" ng-model="$ctrl.listing.category1" name="category1" placeholder="Listing Category 1" class="form-control required">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Category:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" ng-model="$ctrl.listing.category2" name="category2" placeholder="Listing Category 2" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Category:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" ng-model="$ctrl.listing.category3" name="category3" placeholder="Listing Category 3" class="form-control required">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Category:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" ng-model="$ctrl.listing.category4" name="category4" placeholder="Listing Category 4" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Category:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" ng-model="$ctrl.listing.category5" name="category5" placeholder="Listing Category 5" class="form-control required">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Keywords:
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" ng-model="$ctrl.listing.keywords" name="keywords" placeholder="xxxx || xxxx || xxxx || xxxx" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset title="3">
+                            <legend class="text-semibold">STEP 3</legend>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Short Description:</label>
+                                        <input type="text" ng-model="$ctrl.listing.short_description" name="short_description" placeholder="Short Description" class="form-control required">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Long Description:</label>
+                                        <input type="text" ng-model="$ctrl.listing.long_description" name="long_description" placeholder="Long Description" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Keywords:</label>
+                                        <input type="text" ng-model="$ctrl.listing.listing_keywords" name="listing_keywords" placeholder="Keywords" class="form-control required">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Facebook:</label>
+                                        <input type="text" ng-model="$ctrl.listing.facebook" name="facebook" placeholder="Facebook" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Twitter:</label>
+                                        <input type="text" ng-model="$ctrl.listing.twitter" name="twitter" placeholder="Twitter" class="form-control required">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Instagram:</label>
+                                        <input type="text" ng-model="$ctrl.listing.instagram" name="instagram" placeholder="Instagram" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Listing Linkedin:</label>
+                                        <input type="text" ng-model="$ctrl.listing.linkedin" name="linkedin" placeholder="Linkedin" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <button ng-click="$ctrl.submit($ctrl.listing)" type="submit" class="btn btn-primary stepy-finish">Submit
+                            <i class="icon-check position-right"></i>
+                        </button>
+                    </form>
+                </div>
+                <!-- /wizard with validation -->
+
+                <!-- Footer -->
+                <div class="footer text-muted">
+                    &copy; 2017.
+                    <a href="#">Data Management Application</a> by
+                    <a href="" target="_blank">My Fashion Group</a>
+                </div>
+                <!-- /footer -->
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->

@@ -1,0 +1,22 @@
+{
+	"body":{
+		"url":"http://google.com",
+		"date":"19800101",
+		"listing_status":"Enable",
+		"listing_level":"Level 1",
+		"listing_template":"Template 3",
+		"category1":"category 1",
+		"category2":"category 2",
+		"category3":"category 3",
+		"category4":"category 4",
+		"category5":"category 5",
+		"keywords":"test || test1 || test2 || test3",
+		"short_description":"test",
+		"long_description":"test",
+		"listing_keywords":"test",
+		"facebook":"test",
+		"twitter":"test",
+		"instagram":"test",
+		"linkedin":"test"
+	}
+}

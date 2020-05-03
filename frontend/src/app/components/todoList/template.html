@@ -1,0 +1,129 @@
+<!-- <div class="row">
+    <div class="col-md-4">
+        <input class="form-control" type="text" ng-model="$ctrl.filter" placeholder="Filter...">
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <add-todo></add-todo>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <todo-table todos="$ctrl.todos" filter="$ctrl.filter"></todo-table>
+</div> -->
+<page-header></page-header>
+
+<!-- Page container -->
+<div class="page-container" style="min-height:608px;">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main sidebar -->
+        <div class="sidebar sidebar-main">
+            <sidebar></sidebar>
+        </div>
+        <!-- /main sidebar -->
+
+        <!-- Main content -->
+        <div ng-if="$ctrl.addMode">
+            <add-todo taskmode="$ctrl.addMode" task="$ctrl.task"></add-todo>
+        </div>
+
+        <div class="content-wrapper" ng-if="!$ctrl.addMode">
+
+            <!-- Page header -->
+            <div class="page-header">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        <h4>
+                            <i class="icon-arrow-left52 position-left"></i>
+                            <span class="text-semibold">Task Manager</span> - List
+                        </h4>
+
+                        <ul class="breadcrumb position-right">
+                            <li>
+                                <a href="#">
+                                    <i class="icon-home2 position-left"></i> Home</a>
+                            </li>
+                            <li>
+                                <a ui-sref="todos">Task manager</a>
+                            </li>
+                            <li class="active">List</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /page header -->
+
+
+            <!-- Content area -->
+            <div class="content">
+                <div class="panel panel-white">
+                    <div class="panel-heading">
+                        <h6 class="panel-title">
+                            <a href="#" ng-click="$ctrl.add()" class="text-default">&nbsp;
+                                <i class="icon-plus22"></i> Add Task
+                            </a>
+                        </h6>
+                        <div class="heading-elements">
+                            <!-- <ul class="icons-list">
+                                <li><a data-action="reload" ng-click="$ctrl.getList()"></a></li>
+                            </ul> -->
+                            <h6 class="panel-title" style="cursor:pointer;" ngf-select="$ctrl.uploadBulkTask($files, $invalidFiles)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ngf-max-height="1000" ngf-max-size="1MB">
+                                <i class="icon-upload"></i> &nbsp;Upload Bulk Task
+                            </h6>
+                        </div>
+                    </div>
+
+                    <table class="table tasks-list table-lg">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Task Description</th>
+                                <th>Company Name</th>
+                                <th>Priority</th>
+                                <th>Latest update</th>
+                                <th>Status</th>
+                                <!-- <th class="text-center text-muted" style="width: 30px;"><i class="icon-checkmark3"></i></th> -->
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="todo in $ctrl.todos">
+                                <td>{{$index+1}}</td>
+                                <td>{{todo.name}}</td>
+                                <td>{{todo.companyname}}</td>
+                                <td>{{todo.priority}}</td>
+                                <td>{{todo.updatedAt | date:'medium'}}</td>
+                                <td>{{todo.tstatus}}</td>
+                                <td>
+                                    <i class="icon-pencil" style="cursor: pointer" ng-click="$ctrl.edit(todo)"></i>
+                                </td>
+                                <td>
+                                    <i class="icon-cross" style="cursor: pointer" ng-click="$ctrl.open(todo)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Footer -->
+                <div class="footer text-muted">
+                    &copy; 2017.
+                    <a href="#">Data Management</a> by
+                    <a href="" target="_blank">My Fashion Group</a>
+                </div>
+                <!-- /footer -->
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->

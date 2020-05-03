@@ -1,0 +1,93 @@
+<!-- Main content -->
+<div class="content-wrapper">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Task manage list</span></h4>
+            </div>
+        </div>
+
+        <div class="breadcrumb-line">
+            <ul class="breadcrumb">
+                <li><a href="#"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li><a ui-sref="todos">Task manager</a></li>
+                <li class="active">Add Task</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <!-- Content area -->
+    <div class="content">
+        <!-- Vertical form options -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Basic layout-->
+                <form name="myForm" novalidate>
+                    <div class="panel panel-flat col-md-12 offset-md-3">
+                        <div class="panel-heading col-md-12">
+                            <h5 class="panel-title" ng-show="$ctrl.task.id">Edit Task </h5>
+                            <h5 class="panel-title" ng-show="!$ctrl.task.id">Add New Task </h5>
+                        </div>
+
+                        <div class="panel-body col-md-12">
+                            <div class="form-group col-md-8">
+                                <label>Task Name:</label>
+                                <input type="text" required ng-model="$ctrl.task.name" name="tname" class="form-control" placeholder="Enter task name">
+                                <div ng-show="myForm.$submitted || myForm.tname.$touched">
+                                    <span style="color: red;" ng-show="myForm.tname.$error.required">Please enter task name.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-8">
+                                    <label>Company Name:</label>
+                                    <input type="text" required ng-model="$ctrl.task.companyname" name="tcompanyname" class="form-control" placeholder="Enter company name">
+                                    <div ng-show="myForm.$submitted || myForm.tcompanyname.$touched">
+                                        <span style="color: red;" ng-show="myForm.tcompanyname.$error.required">Please enter company name.</span>
+                                    </div>
+                                </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Priority: </label>
+                                <select class="form-control" name="scraping_template" class="select" ng-model="$ctrl.task.priority">
+                                                                <option value="Highest priority">Highest priority</option>
+                                                                <option value="High priority">High priority</option>
+                                                                <option value="Normal priority">Normal priority</option>
+                                                                <option value="Low priority">Low priority</option>
+                                                            </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Status: </label>
+                                <select class="form-control" name="scraping_template" class="select" ng-model="$ctrl.task.tstatus">
+                                                                    <option value="open">Open</option>
+                                                                    <option value="hold">On hold</option>
+                                                                    <option value="resolved" selected="selected">Resolved</option>
+                                                                    <option value="dublicate">Dublicate</option>
+                                                                    <option value="invalid">Invalid</option>
+                                                                    <option value="wontfix">Wontfix</option>
+                                                                    <option value="closed">Closed</option>
+                                                                </select>
+                            </div>
+
+                            <div class="text-right col-md-4">
+                                <button type="button" ng-click="$ctrl.back()" class="btn btn-primary">Back</button>
+
+                                <button type="submit" ng-click="$ctrl.create($ctrl.task,myForm.$invalid)" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- /basic layout -->
+
+            </div>
+        </div>
+        <!-- /vertical form options -->
+
+    </div>
+    <!-- /content area -->
+
+</div>
+<!-- /main content -->
